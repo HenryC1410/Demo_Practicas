@@ -1,0 +1,179 @@
+:root{
+  --bg-1:#eaf2ff; --bg-2:#dfeaff;
+  --text:#0f172a; --muted:#6b7a90;
+  --card:#ffffff; --border:#e6ebf5;
+  --shadow:0 10px 30px rgba(25,46,91,.12);
+  --primary:#0b0d18; --primary-hover:#0f1324;
+  --seg-border:#d9e3f5; --link:#2f63ff;
+  --radius-xl:22px; --radius-md:12px;
+  --error:#e5484d; --error-bg:#ffeef0; --error-border:#ffc8cc;
+}
+
+*{ box-sizing:border-box; }
+html,body{ height:100%; margin:0; }
+body{
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Noto Sans", "Liberation Sans", sans-serif;
+  color:var(--text);
+  background: radial-gradient(1200px 600px at 50% -10%, #f5f9ff 0%, var(--bg-1) 55%, var(--bg-2) 100%);
+  min-height:100vh;
+}
+
+.shell{ width:min(1100px,92%); margin:40px auto 60px; }
+
+
+/* ===== Hero con gorrito (encabezado superior) ===== */
+.hero{
+  width: 100%;
+  background: linear-gradient(180deg, #f3f7ff 0%, #eaf2ff 60%, transparent 100%);
+  padding: 36px 0 28px;
+}
+.hero-inner{
+  width: min(1100px, 92%);
+  margin: 0 auto;
+  text-align: center;
+}
+.cap{
+  display: inline-grid;
+  place-items: center;
+  width: 76px; height: 76px;
+  margin: 0 auto 8px;
+  background: #ffffffcc;
+  border: 1px solid #e6ebf5;
+  border-radius: 20px;
+  box-shadow: 0 6px 24px rgba(25,46,91,.10);
+}
+
+
+
+
+
+/* ===== Bloqueo de movimiento lateral / estabilidad ===== */
+
+/* 1) Nunca permitir scroll horizontal (evita paneos al mover el cursor) */
+html, body {
+  overflow-x: hidden;
+}
+
+/* 2) Evita el “scroll chaining” lateral en touchpad/mouse */
+body {
+  overscroll-behavior-x: none;
+  /* si quieres bloquear rebotes también en vertical:
+     overscroll-behavior: contain; */
+}
+
+/* 3) La tarjeta no debe “jitterear” por transformaciones GPU */
+.card {
+  will-change: auto;        /* override al will-change: transform */
+}
+
+/* 4) El fondo no intercepta eventos (por si el drag hacía scroll raro) */
+.page-bg {
+  pointer-events: none;
+}
+
+/* 5) Mantener la tarjeta estable aunque cambie el contenido interno */
+.card {
+  min-height: 520px;        /* ya lo puedes ajustar a tu gusto */
+}
+
+/* 6) Opcional: si no quieres NINGÚN movimiento cuando hay errores,
+   desactiva la animación de sacudida con este override: */
+/* .shake { animation: none !important; } */
+
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius-xl);
+  box-shadow:var(--shadow);
+  padding:30px 32px;
+  width:min(900px,100%);
+  margin:40px auto;
+  will-change: transform;
+}
+
+.card-head{ text-align:center; margin-bottom:20px; }
+.title{ margin:0; font-size:clamp(22px,2.4vw,28px); font-weight:700; }
+.subtitle{ margin:8px 0 18px; color:var(--muted); font-size:15px; }
+
+/* Grid del formulario: 2 columnas en desktop */
+.form{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px 20px;
+}
+
+/* Cada campo es un bloque */
+.field{ display:flex; flex-direction:column; gap:6px; }
+.label{ font-size:14px; color:#3a4a63; }
+
+.input{
+  width:100%;
+  background:#f2f5fb;
+  border:1px solid var(--seg-border);
+  border-radius:var(--radius-md);
+  padding:12px 14px; font-size:15px; color:var(--text);
+  outline:none; transition:border-color .2s, box-shadow .2s, background .2s;
+}
+.input::placeholder{ color:#9aa8bf; }
+.input:focus{ border-color:#b7c7f0; box-shadow:0 0 0 4px rgba(77,117,255,.12); }
+
+select.input{
+  appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%236b7a90' viewBox='0 0 24 24'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 12px center;
+  background-size:18px;
+  padding-right:34px;
+}
+
+/* Error por campo */
+.input.error{
+  border-color:var(--error) !important;
+  box-shadow:0 0 0 4px rgba(229,72,77,.12) !important;
+  background:#fff;
+}
+.field-error{
+  color:#8f1d22; font-size:12px; min-height:16px;
+  visibility:hidden;
+}
+.field.error .field-error{ visibility:visible; }
+
+/* Botón */
+.btn-primary{
+  grid-column:1 / -1;
+  margin-top:6px; width:100%;
+  padding:12px 14px; border:0; border-radius:14px;
+  background:var(--primary); color:#fff; font-weight:700; font-size:15px;
+  cursor:pointer; box-shadow:0 4px 12px rgba(0,0,0,.15);
+  transition:filter .15s, transform .02s, background .18s;
+}
+.btn-primary:hover{ background:var(--primary-hover); filter:brightness(1.02); }
+.btn-primary:active{ transform:translateY(1px); }
+
+/* Mensaje general */
+.alert{
+  margin:0 auto 12px; padding:12px 14px;
+  border-radius:12px; font-size:14px; width:min(760px,100%);
+}
+.alert.error{ background:var(--error-bg); border:1px solid var(--error-border); color:#8f1d22; }
+.hidden{ display:none; }
+
+/* Sacudida */
+@keyframes shake {
+  10%, 90% { transform: translateX(-2px); }
+  20%, 80% { transform: translateX(4px); }
+  30%, 50%, 70% { transform: translateX(-6px); }
+  40%, 60% { transform: translateX(6px); }
+}
+.shake{ animation:shake .45s cubic-bezier(.36,.07,.19,.97) both; }
+
+.register{ text-align:center; margin:14px 0 6px; color:#54627a; }
+.link-strong{ color:var(--link); text-decoration:none; font-weight:600; }
+.link-strong:hover{ text-decoration:underline; }
+
+.site-foot{ text-align:center; color:#6b7a90; font-size:13px; margin-top:18px; }
+
+/* Responsive */
+@media (max-width:780px){
+  .form{ grid-template-columns:1fr; }
+}

@@ -1,0 +1,155 @@
+:root{
+  --bg-1:#eaf2ff; --bg-2:#dfeaff; --text:#0f172a; --muted:#6b7a90;
+  --card:#ffffff; --border:#e6ebf5; --shadow:0 10px 30px rgba(25,46,91,.12);
+  --primary:#0b0d18; --primary-hover:#0f1324; --seg-border:#d9e3f5; --link:#2f63ff;
+  --radius-xl:22px; --radius-lg:16px; --radius-md:12px;
+  --error:#e5484d; --error-bg:#ffeef0; --error-border:#ffc8cc;
+}
+
+
+*{ box-sizing:border-box; } html,body{ height:100%; }
+body{ margin:0; font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,"Noto Sans","Liberation Sans",sans-serif; color:var(--text); }
+
+.page-bg{ position:fixed; inset:0; background:radial-gradient(1200px 600px at 50% -10%, #f5f9ff 0%, var(--bg-1) 55%, var(--bg-2) 100%); z-index:-1; }
+.shell{ width:min(1100px,92%); margin:28px auto 40px; }
+
+
+
+/* ===== Hero con gorrito (encabezado superior) ===== */
+.hero{
+  width: 100%;
+  background: linear-gradient(180deg, #f3f7ff 0%, #eaf2ff 60%, transparent 100%);
+  padding: 36px 0 28px;
+}
+.hero-inner{
+  width: min(1100px, 92%);
+  margin: 0 auto;
+  text-align: center;
+}
+.cap{
+  display: inline-grid;
+  place-items: center;
+  width: 76px; height: 76px;
+  margin: 0 auto 8px;
+  background: #ffffffcc;
+  border: 1px solid #e6ebf5;
+  border-radius: 20px;
+  box-shadow: 0 6px 24px rgba(25,46,91,.10);
+}
+.hero-title{
+  margin: 8px 0 4px;
+  font-size: clamp(20px, 3vw, 32px);
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: .2px;
+}
+.hero-subtitle{
+  margin: 0;
+  color: #6b7a90;
+  font-size: clamp(13px, 2vw, 15px);
+}
+
+
+
+
+/* ===== Bloqueo de movimiento lateral / estabilidad ===== */
+
+/* 1) Nunca permitir scroll horizontal (evita paneos al mover el cursor) */
+html, body {
+  overflow-x: hidden;
+}
+
+/* 2) Evita el “scroll chaining” lateral en touchpad/mouse */
+body {
+  overscroll-behavior-x: none;
+  /* si quieres bloquear rebotes también en vertical:
+     overscroll-behavior: contain; */
+}
+
+/* 3) La tarjeta no debe “jitterear” por transformaciones GPU */
+.card {
+  will-change: auto;        /* override al will-change: transform */
+}
+
+/* 4) El fondo no intercepta eventos (por si el drag hacía scroll raro) */
+.page-bg {
+  pointer-events: none;
+}
+
+/* 5) Mantener la tarjeta estable aunque cambie el contenido interno */
+.card {
+  min-height: 520px;        /* ya lo puedes ajustar a tu gusto */
+}
+
+/* 6) Opcional: si no quieres NINGÚN movimiento cuando hay errores,
+   desactiva la animación de sacudida con este override: */
+/* .shake { animation: none !important; } */
+
+
+
+
+
+.card{
+  width:min(890px,100%); margin:60px auto 16px; background:var(--card);
+  border:1px solid var(--border); border-radius:var(--radius-xl); box-shadow:var(--shadow);
+  padding:28px 28px 18px; will-change: transform;
+}
+.card-head{ text-align:center; margin-bottom:8px; }
+.title{ margin:0; font-size:clamp(22px,2.4vw,28px); font-weight:700; }
+.subtitle{ margin:6px 0 18px; color:var(--muted); font-size:15px; }
+
+.form{ width:min(760px,100%); margin:0 auto; display:grid; gap:12px; }
+.label{ font-size:14px; color:#3a4a63; margin-top:6px; }
+.input{
+  width:100%; background:#f2f5fb; border:1px solid var(--seg-border);
+  border-radius:var(--radius-md); padding:12px 14px; font-size:15px; color:var(--text);
+  outline:none; transition:border-color .18s, box-shadow .18s;
+}
+.input::placeholder{ color:#9aa8bf; }
+.input:focus{ border-color:#b7c7f0; box-shadow:0 0 0 4px rgba(77,117,255,.12); }
+.input.error{ border-color:var(--error)!important; box-shadow:0 0 0 4px rgba(229,72,77,.12)!important; background:#fff; }
+
+.password-wrap{ position:relative; display:grid; }
+.toggle-pass{
+  position:absolute; right:10px; top:50%; transform:translateY(-50%);
+  height:36px; width:36px; border-radius:50%; border:1px solid transparent;
+  background:transparent; color:#6b7a90; display:grid; place-items:center; cursor:pointer;
+}
+.toggle-pass:hover{ background:#e9f0ff; border-color:#d6e1ff; }
+.toggle-pass.on{ color:#1b2559; }
+
+.row{ display:flex; gap:10px; align-items:center; margin-top:4px; }
+.between{ justify-content:space-between; }
+.link{ color:var(--link); text-decoration:none; font-size:14px; }
+.link:hover{ text-decoration:underline; }
+.link-strong{ color:var(--link); font-weight:600; text-decoration:none; }
+
+.btn-primary{
+  margin-top:8px; width:100%; padding:12px 14px; border:0; border-radius:14px;
+  background:var(--primary); color:#fff; font-weight:700; font-size:15px; cursor:pointer;
+  box-shadow:0 4px 12px rgba(0,0,0,.15); transition:filter .15s, transform .02s, background .18s;
+}
+.btn-primary:hover{ background:var(--primary-hover); filter:brightness(1.02); }
+.btn-primary:active{ transform:translateY(1px); }
+
+.register{ text-align:center; margin:14px 0 6px; color:#54627a; }
+.site-foot{ text-align:center; color:#6b7a90; font-size:13px; margin-top:18px; }
+
+/* Alertas */
+.alert{ width:min(760px,100%); margin:0 auto 10px; padding:12px 14px; border-radius:12px; font-size:14px; }
+.alert.error{ background:var(--error-bg); border:1px solid var(--error-border); color:#8f1d22; }
+.hidden{ display:none; }
+
+/* Sacudida */
+@keyframes shake {
+  10%, 90% { transform: translateX(-2px); }
+  20%, 80% { transform: translateX(4px); }
+  30%, 50%, 70% { transform: translateX(-6px); }
+  40%, 60% { transform: translateX(6px); }
+}
+.shake{ animation:shake .45s cubic-bezier(.36,.07,.19,.97) both; }
+
+@media (max-width:640px){
+  .card{ padding:22px 16px 14px; margin-top:36px; }
+  .btn-primary{ font-size:14px; }
+}

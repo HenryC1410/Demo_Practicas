@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prácticas Preprofesionales – Panel Coordinador</title>
+
+  <!-- Ionicons -->
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+  <link rel="stylesheet" href="css/style-Inicio.css" />
+</head>
+<body>
+  <div class="layout">
+    <!-- ===== Sidebar ===== -->
+    <aside class="sidebar">
+      <div>
+        <div class="brand">
+          <div class="brand-logo" aria-hidden="true">
+            <ion-icon name="school-outline"></ion-icon>
+          </div>
+          <div class="brand-text">
+            <strong>Prácticas Preprofesionales</strong>
+            <span>Panel Coordinador</span>
+          </div>
+        </div>
+
+        <!-- Menú lateral -->
+        <nav class="menu">
+          <a class="menu-item active" data-section="dashboard">
+            <ion-icon name="grid-outline"></ion-icon>
+            <span>Inicio</span>
+          </a>
+          <a class="menu-item" data-section="estudiantes">
+            <ion-icon name="people-outline"></ion-icon>
+            <span>Estudiantes</span>
+          </a>
+          <a class="menu-item" data-section="empresas">
+            <ion-icon name="business-outline"></ion-icon>
+            <span>Empresas</span>
+          </a>
+          <a class="menu-item" data-section="ofertas">
+            <ion-icon name="briefcase-outline"></ion-icon>
+            <span>Ofertas</span>
+          </a>
+          <a class="menu-item" data-section="postulaciones">
+            <ion-icon name="document-text-outline"></ion-icon>
+            <span>Postulaciones</span>
+          </a>
+        </nav>
+      </div>
+
+      <a href="login.html" class="logout-link">
+        <ion-icon name="log-out-outline"></ion-icon>
+        <span>Cerrar sesión</span>
+      </a>
+    </aside>
+
+    <!-- ===== Contenido Principal ===== -->
+    <main class="main">
+      <header class="topbar">
+        <form class="search-wrap" role="search">
+          <div class="search-box">
+            <ion-icon name="search-outline"></ion-icon>
+            <input type="search" class="search" placeholder="Buscar estudiantes, empresas, ofertas…" />
+          </div>
+        </form>
+      </header>
+
+      <!-- Secciones dinámicas -->
+      <div id="content"></div>
+
+      <footer class="footer">Demo estática — lista para conectar datos.</footer>
+    </main>
+  </div>
+
+  <!-- Scripts principales -->
+   <script src="js/api.js" defer></script>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
